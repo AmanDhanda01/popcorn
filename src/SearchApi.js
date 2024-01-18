@@ -17,6 +17,7 @@ export default async function Api(movieName){
       try{
         let res = await fetch(`https://api.themoviedb.org/3/search/multi?query=${movieName}&include_adult=false&language=en-US&page=1`, options);
         let Data = await res.json();
+        console.log(Data);
         return Data;
       }
       catch(error){

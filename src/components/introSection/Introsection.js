@@ -8,7 +8,7 @@ import Introinfo from './Introinfo'
 const Introsection = ({Data}) => {
 
   if(Data){
-    const index = Math.floor(Math.random()*Data.results.length);
+    const index = Math.floor(Math.random()*Data?.results?.length);
     var url = `https://image.tmdb.org/t/p/original/${Data.results[index].backdrop_path}`;
   }
 

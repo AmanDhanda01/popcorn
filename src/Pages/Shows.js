@@ -1,44 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Api from '../Api';
 import Card from '../components/moviecards/Card';
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 
 
 
 const Shows = () => {
 
-    const state = useLocation();
+    const {state} = useLocation();
     const [shows,setShows] = useState([]);
     const [genre,setGenre] = useState("Select genre")
     const [sort,setSort] = useState("sort by");
-    let page  = 1;
+    const [page,setPage] = useState(1);
 
      async function Fetch() {
-       console.log(page);
-        const res = await Api(state.type,"top_rated",page);
-        console.log(res);
+        const res = await Api(state.type,"popular",page);
         setShows((prev) =>[...prev,...res.results]); 
     };
+    function increment(){
+        setPage(prev => prev+1);
+    }
     
     useEffect(() =>{
         
         Fetch();
         
-    },[page])
-
-
-    useEffect(() =>{
-         window.addEventListener("scroll",()=>{
-              if(window.scrollY + 312 ===window.innerHeight){
-                    page+=1;
-
-              }
-         });
-         
-         return () =>{
-              window.removeEventListener('scroll',() =>console.log("yo"));
-         }
-    })
+        
+        
+    },[page]);
 
 
     console.log(shows);
@@ -47,17 +38,22 @@ const Shows = () => {
     <div className=' max-w-[1200px] mx-auto mt-20   '>\
      
        <div className='flex items-center justify-between'>
-                 <h2 className='text-white'>Explore movies</h2>
+                 <h2 className='text-white'>Explore {`${state.type}s`}</h2>
                  
 
        </div>
     
 
-    <div className='grid grid-cols-5 gap-7'>
-                    {shows && shows.map((movie)=>(
-                        < Card key = {movie.id} movie = {movie}/>
+
+                  <InfiniteScroll dataLength={shows.length} next ={increment} loader={<h4 className='text-white'>Loading...</h4>} hasMore={true} >
+                  <div className='grid grid-cols-5 gap-7'>
+                  {shows && shows.map((movie)=>(
+                        < Card key = {movie.id} movie = {movie} type={state.type}/>
                     ))}
-    </div>
+                    </div>
+                  </InfiniteScroll>
+                    
+   
   
    
   </div>

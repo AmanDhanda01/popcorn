@@ -16,6 +16,7 @@ const Movie = () => {
   const[videos , SetVideo] = useState(false);
   const[Cast, SetCast] = useState(null);
   const{state} = useLocation();
+  console.log(state)
   useEffect(() => {
     async function fetchCast() {
 

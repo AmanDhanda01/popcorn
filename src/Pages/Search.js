@@ -1,7 +1,9 @@
 import React, { useState , useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Api from '../SearchApi'
-import SearchCard from '../components/moviecards/SearchCard'
+// import SearchCard from '../components/moviecards/SearchCard'
+import Card from '../components/moviecards/Card'
+
 
 
 const Search = () => {
@@ -30,7 +32,7 @@ const Search = () => {
         <div className=' gap-x-6 gap-y-6 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 mb-3 '>
             {Results && Results.results.map((movie)=>(
             <div className='max-w-[230px] max-h-[402px] rounded-2xl cursor-pointer '>
-                    <SearchCard key = {movie.id} movie = {movie}/>
+                    <Card key = {movie.id} movie = {movie}/>
             </div>
             ))}
         </div>
