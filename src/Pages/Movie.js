@@ -60,12 +60,12 @@ const Movie = () => {
   return (
     <div className='min-h-[1200px] h-fit max-w-[1200px]  mx-auto mt-16 text-white bg-black py-12'>
       {/* {Movie && Movie.original_title} */}
-      <div className='flex flex-col justify-center lg:flex-row w-full'>
-        <div className='w-[100%] lg:w-[50%]  min-h-[250px] lg:min-h-[500px]'>
-        <img className='w-full rounded-2xl object-cover object-center' 
-        src={(Movie?.poster_path)?`https://image.tmdb.org/t/p/w500/${Movie?.poster_path}`:('/assets/no-poster.png')}/>
+      <div className='flex flex-col justify-center lg:flex-row w-full h-full'>
+        <div className='w-[100%] lg:w-[50%]  min-h-full'>
+             <img className='w-full h-[25%] lg:h-[85%] rounded-2xl' 
+              src={(Movie?.poster_path)?`https://image.tmdb.org/t/p/w500/${Movie?.poster_path}`:('/assets/no-poster.png')}/>
         </div>
-        <div className=" flex flex-col justify-start items-start py-8 pl-12 space-y-4">
+        <div className=" flex flex-col w-[100%] justify-start items-start py-8 pl-12 space-y-4">
           <div>
             <h1 className='text-[34px] leading-10 '>{Movie?.original_title ||Movie?.name}</h1>
             <p className=' text-[20px] opacity-50 '>{Movie?.tagline}</p>
