@@ -42,13 +42,12 @@ const Shows = () => {
        <div className='flex items-center justify-between'>
                  <h2 className='text-white text-3xl font-bold mb-5'>Explore {`${state.type==="movie" ? "Movies" : "TV Shows"}`}</h2>
                  
-
-       </div>
+      </div>
     
 
 
                   <InfiniteScroll dataLength={shows.length} next ={increment} loader={<h4 className='text-white'>Loading...</h4>} hasMore={true} >
-                  <div className='grid grid-cols-5 gap-7'>
+                  <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-7'>
                   {shows && shows.map((movie,index)=>(
                         < Card key = {index} movie = {movie} type={state.type}/>
                     ))}

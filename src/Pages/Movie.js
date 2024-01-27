@@ -17,6 +17,7 @@ const Movie = () => {
   const[Cast, SetCast] = useState(null);
   const{state} = useLocation();
   console.log(state)
+  let color = "red"
   useEffect(() => {
     async function fetchCast() {
 
@@ -48,13 +49,19 @@ const Movie = () => {
   useEffect(() =>{
     window.scroll(0, 0);
   })
-const [isOpen, setOpen] = useState(false);
+  if(Movie?.vote_average<5){
+        color = "red";
+   }else if(Movie?.vote_average>5 && Movie?.vote_average<7.5){
+       color = "yellow"
+   }else{
+       color="green"
+   }
 
   return (
     <div className='min-h-[1200px] h-fit max-w-[1200px]  mx-auto mt-16 text-white bg-black py-12'>
       {/* {Movie && Movie.original_title} */}
-      <div className='flex w-full'>
-        <div className='w-[50%] min-w-[350px] min-h-[500px]'>
+      <div className='flex flex-col justify-center lg:flex-row w-full'>
+        <div className='w-[100%] lg:w-[50%]  min-h-[250px] lg:min-h-[500px]'>
         <img className='w-full rounded-2xl object-cover object-center' 
         src={(Movie?.poster_path)?`https://image.tmdb.org/t/p/w500/${Movie?.poster_path}`:('/assets/no-poster.png')}/>
         </div>
@@ -73,14 +80,10 @@ const [isOpen, setOpen] = useState(false);
           }
           </div>
           {/* <CircularProg value = {Movie?.vote_average} color = 'success'/> */}
-          <div className='flex space-x-20 mt-2'>
-            <div className='  w-14 h-14'>
-            <CircularProg percentage={Movie?.vote_average}/> </div>
-
-            <button className="btn-primary text-[25px] " onClick={() =>{window.scrollY(50)}}>
-            Watch trailer
-            </button>
-          </div>
+        
+               <div style={{outlineColor:color}} className= ' outline outline-4 text-[20px]  font-bold rounded-full w-12 h-12 bg-white flex items-center justify-center  ml-2 mt-4 mb-3 text-black'>
+                            {Math.round(Movie?.vote_average*10)/10}
+               </div>
           
           <div>
           <h2 className='text-[30px] mb-2'>Overview</h2>
