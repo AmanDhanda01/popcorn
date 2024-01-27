@@ -17,7 +17,7 @@ const Card = ({movie,type}) => {
   
     // console.log(movie);
   return (
-    <div className='min-w-[230px] min-h-[402px] rounded-2xl flex flex-col justify-between relative cursor-pointer' onClick={clickhandler}>
+    <div className='hover:-translate-y-5 min-w-[230px] min-h-[402px] rounded-2xl flex flex-col justify-between relative cursor-pointer' onClick={clickhandler}>
         <img className='w-full rounded-2xl' 
         src={(movie.poster_path)?`https://image.tmdb.org/t/p/w500/${movie.poster_path}`:('/assets/no-poster.png')}/>
         <div className=' text-[20px] font-bold rounded-full w-12 h-12 bg-white flex items-center justify-center absolute ml-2 mt-[300px] text-black'>

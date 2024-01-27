@@ -18,27 +18,29 @@ const Shows = () => {
      async function Fetch() {
         const res = await Api(state.type,"popular",page);
         setShows((prev) =>[...prev,...res.results]); 
+        console.log(shows);
     };
     function increment(){
         setPage(prev => prev+1);
     }
-    
+    useEffect(()=>{
+          window.scroll(0,0);
+          setShows([]);
+    },[state.type]);
+
+
     useEffect(() =>{
-        
         Fetch();
-        
-        
-        
-    },[page]);
+    },[page,state.type]);
 
 
-    console.log(shows);
+    // console.log(shows);
 
   return (
     <div className=' max-w-[1200px] mx-auto mt-20   '>\
      
        <div className='flex items-center justify-between'>
-                 <h2 className='text-white'>Explore {`${state.type}s`}</h2>
+                 <h2 className='text-white text-3xl font-bold mb-5'>Explore {`${state.type==="movie" ? "Movies" : "TV Shows"}`}</h2>
                  
 
        </div>
@@ -47,8 +49,8 @@ const Shows = () => {
 
                   <InfiniteScroll dataLength={shows.length} next ={increment} loader={<h4 className='text-white'>Loading...</h4>} hasMore={true} >
                   <div className='grid grid-cols-5 gap-7'>
-                  {shows && shows.map((movie)=>(
-                        < Card key = {movie.id} movie = {movie} type={state.type}/>
+                  {shows && shows.map((movie,index)=>(
+                        < Card key = {index} movie = {movie} type={state.type}/>
                     ))}
                     </div>
                   </InfiniteScroll>
